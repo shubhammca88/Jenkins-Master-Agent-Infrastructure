@@ -1,0 +1,13 @@
+ami_id              = "ami-0c02fb55956c7d316"
+instance_types      = ["t2.micro"]
+key_name            = "jenkins-master-key"
+public_key_path     = "./id_rsa.pub"
+region              = "us-east-1"
+server_count        = 1
+server_names        = ["Jenkins-Master"]
+environments        = ["Dev"]
+server_ports        = [[8080, 22, 50000], [22, 50000], [22, 50000]]
+allowed_cidr_blocks = ["0.0.0.0/0"]
+associate_public_ip = true
+enable_elastic_ip   = true
+install_jenkins     = true
