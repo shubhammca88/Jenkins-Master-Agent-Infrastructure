@@ -8,7 +8,6 @@ resource "aws_instance" "servers" {
   monitoring                  = true
   user_data                   = var.install_jenkins && count.index == 0 ? base64encode(file("${path.module}/jenkins-install.sh")) : null
 
-
   root_block_device {
     encrypted = true
   }
@@ -17,4 +16,10 @@ resource "aws_instance" "servers" {
     Name        = var.server_names[count.index]
     Environment = var.environments[count.index]
   }
+}
+
+resource "aws_ec2_instance_state" "servers" {
+  count       = var.server_count
+  instance_id = aws_instance.servers[count.index].id
+  state       = var.instance_state
 }

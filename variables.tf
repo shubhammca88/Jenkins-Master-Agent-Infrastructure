@@ -77,3 +77,14 @@ variable "install_jenkins" {
   default     = false
 }
 
+variable "instance_state" {
+  description = "Desired state of instances (running or stopped)"
+  type        = string
+  default     = "running"
+  
+  validation {
+    condition     = contains(["running", "stopped"], var.instance_state)
+    error_message = "Instance state must be either 'running' or 'stopped'."
+  }
+}
+
